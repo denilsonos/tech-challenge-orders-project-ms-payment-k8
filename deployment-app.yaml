@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fiap-payment-app
+  template:
+    metadata:
+      labels:
+        app: fiap-payment-app
+    spec:
+      containers:
+      - name: fiap-payment-app
+        image: DOCKER_IMAGE
+        ports:
+        - containerPort: 3002
+        envFrom:
+        - secretRef:
+            name: app-secret
